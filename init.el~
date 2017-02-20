@@ -1,0 +1,6 @@
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'dracula t)
+(add-to-list 'load-path "/home/robin/Gits/ESS/lisp/")
+(require 'ess-site)
+(require 'iso-transl)
+(setq smerge-command-prefix "\C-cv")
