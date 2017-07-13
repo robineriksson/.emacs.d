@@ -1,6 +1,9 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
+;; set font
+(set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
+
 ;; hide toolbar
 ;;
 ;; https://www.emacswiki.org/emacs/ToolBar#toc1
@@ -35,8 +38,10 @@
 ;;(set-frame-font "Inconsolata-14")
 ;; enable ess (R interpretor)
 (use-package ess-site
-  :load-path "/home/robin/Gits/ESS/lisp/"
-    :commands R)
+  ;;:ensure t
+  ;;:init (require 'ess-site))
+  :load-path "/home/robin/Gits/ESS/lisp/")
+;;    :commands R)
 ;;(add-to-list 'load-path "/home/robin/Gits/ESS/lisp/")
 ;;(require 'ess-site)
 ;;tilde and other symbols
@@ -51,8 +56,8 @@
 
 ;; flycheck (syntax checking)
 (use-package flycheck
-	     :ensure t
-	       :init (global-flycheck-mode))
+  :ensure t
+  :init (global-flycheck-mode))
 
 
 (use-package auto-complete
@@ -62,3 +67,12 @@
     (ac-config-default)
     (global-auto-complete-mode t)
     ))
+
+(use-package dumb-jump
+  :bind (("M-g o" . dumb-jump-go-other-window)
+	 ("M-g j" . dumb-jump-go)
+	 ("M-g i" . dumb-jump-go-prompt)
+	 ("M-g x" . dumb-jump-go-prefer-external)
+	 ("M-g z" . dumb-jump-go-prefer-external-other-window))
+  :config (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
+  :ensure)
