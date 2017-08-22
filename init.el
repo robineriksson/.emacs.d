@@ -38,9 +38,17 @@
 ;;(set-frame-font "Inconsolata-14")
 ;; enable ess (R interpretor)
 (use-package ess-site
-  ;;:ensure t
+;;(use-package ess  ;;:ensure t
   ;;:init (require 'ess-site))
-  :load-path "/home/robin/Gits/ESS/lisp/")
+  ;;:defer t
+  ;;:ensure t
+  ;;:bind ("C-c r" . R))
+  ;;(autoload 'R-mode "ess-site.el" "" t)
+  ;;(add-to-list 'auto-mode-alist '("\\.R\\'" . R-mode))
+  ;;(setq inferior-R-args "--no-restore-history --no-save ")
+  ;;(setq ess-history-file nil)
+  )
+  ;  :load-path "/home/robin/Gits/ESS/lisp/")
 ;;    :commands R)
 ;;(add-to-list 'load-path "/home/robin/Gits/ESS/lisp/")
 ;;(require 'ess-site)
@@ -76,3 +84,16 @@
 	 ("M-g z" . dumb-jump-go-prefer-external-other-window))
   :config (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
   :ensure)
+
+;;MAGIT
+(use-package magit
+  :defer t
+  :ensure t
+  :bind ("C-x g" . magit-status))
+
+;; magit-gh-pull A github extension to magit
+(use-package magithub
+  :after magit
+  :config (magithub-feature-autoinject t))
+
+
