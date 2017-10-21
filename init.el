@@ -1,3 +1,4 @@
+;;Initialize packages
 (setq package-enable-at-startup nil)
 (package-initialize)
 
@@ -96,4 +97,39 @@
   :after magit
   :config (magithub-feature-autoinject t))
 
+(find-file "~/Dropbox/todo.org")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/Dropbox/todo.org")))
+ '(org-todo-keywords
+   (quote
+    ((sequence "TODO(t)" "DONE(d)" "WAITING(w)" "SOMEDAY(s)")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
+(global-set-key (kbd "C-c a") 'org-agenda)
+
+;;; AUCTEX
+;; (use-package tex
+;;   :defer t
+;;   :ensure auctex
+;;   :config
+;;   (setq TeX-auto-save t))
+(use-package auctex
+  :defer t
+  :ensure t)
+  ;; :config
+  ;; (setq TeX-auto-save t)
+  ;; (setq TeX-parse-self t)
+  ;; (setq-default TeX-master nil))
+
+;; remove whitepspaces.
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;;; init.el ends here
