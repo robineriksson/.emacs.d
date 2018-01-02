@@ -132,4 +132,27 @@
 
 ;; remove whitepspaces.
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-;;; init.el ends here
+
+;; C-code style
+;; not really a fan of this, but right now used in a package
+;; with style guidelines that should be follows.
+(setq c-default-style "k&r"
+      c-basic-offset 4)
+(setq-default indent-tabs-mode nil)
+
+(add-hook 'c-mode-common-hook
+          (lambda()
+            (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
+
+;; octave major mode
+(autoload 'octave-mode "octave-mod" nil t)
+(setq auto-mode-alist
+      (cons '("\\.m$" . octave-mode) auto-mode-alist))
+
+(add-hook 'octave-mode-hook
+          (lambda ()
+            (abbrev-mode 1)
+            (auto-fill-mode 1)
+            (if (eq window-system 'x)
+                (font-lock-mode 1))))
+;;; init.el ends
