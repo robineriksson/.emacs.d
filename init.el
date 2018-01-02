@@ -106,7 +106,10 @@
  '(org-agenda-files (quote ("~/Dropbox/todo.org")))
  '(org-todo-keywords
    (quote
-    ((sequence "TODO(t)" "DONE(d)" "WAITING(w)" "SOMEDAY(s)")))))
+    ((sequence "TODO(t)" "DONE(d)" "WAITING(w)" "SOMEDAY(s)"))))
+ '(package-selected-packages
+   (quote
+    (elpy auctex use-package magit flycheck dumb-jump auto-complete))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -155,4 +158,17 @@
             (auto-fill-mode 1)
             (if (eq window-system 'x)
                 (font-lock-mode 1))))
-;;; init.el ends
+
+
+(use-package elpy
+  ;;:defer t
+  ;;:ensure t
+  )
+(elpy-enable)
+
+;; (defvar myPackages
+;;   '(better-defaults
+;;     elpy ;; add the elpy package
+;;     material-theme))
+;; (elpy-enable)
+;;; init.el ends here
