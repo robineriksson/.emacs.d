@@ -3,7 +3,7 @@
 (package-initialize)
 
 ;; set font
-(set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
+;;(set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
 
 ;; hide toolbar
 ;;
@@ -49,6 +49,13 @@
   ;;(setq inferior-R-args "--no-restore-history --no-save ")
   ;;(setq ess-history-file nil)
   )
+
+(require 'ess-site)
+;(require 'ess-rutils)
+
+(dolist (map (list ess-mode-map inferior-ess-mode-map))
+  (define-key map (kbd ";") 'ess-insert-assign))
+
   ;  :load-path "/home/robin/Gits/ESS/lisp/")
 ;;    :commands R)
 ;;(add-to-list 'load-path "/home/robin/Gits/ESS/lisp/")
@@ -59,8 +66,17 @@
 ;; add melpa package list
 (require 'package)
 
+;; (add-to-list 'package-archives
+;; 	     ("MELPA"        . "https://melpa.org/packages/")
+;; 	     t )
+
 (add-to-list 'package-archives
-	     '("MELPA Stable" . "https://stable.melpa.org/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
+
+(setq package-archives '(("gnu" . "http://mirrors.163.com/elpa/gnu/")
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("org" . "http://orgmode.org/elpa/")))
+
 (package-initialize)
 
 ;; flycheck (syntax checking)
@@ -97,27 +113,28 @@
   :after magit
   :config (magithub-feature-autoinject t))
 
-(find-file "~/Dropbox/todo.org")
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/Dropbox/todo.org")))
- '(org-todo-keywords
-   (quote
-    ((sequence "TODO(t)" "DONE(d)" "WAITING(w)" "SOMEDAY(s)"))))
- '(package-selected-packages
-   (quote
-    (elpy auctex use-package magit flycheck dumb-jump auto-complete))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; (find-file "~/Dropbox/todo.org")
+;; (custom-set-variables
+;;  ;; custom-set-variables was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(org-agenda-files (quote ("~/Dropbox/todo.org")))
 
-(global-set-key (kbd "C-c a") 'org-agenda)
+;;  '(org-todo-keywords
+;;    (quote
+;;     ((sequence "TODO(t)" "DONE(d)" "WAITING(w)" "SOMEDAY(s)"))))
+;;  '(package-selected-packages
+;;    (quote
+;;     (elpy auctex use-package magit flycheck dumb-jump auto-complete))))
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  )
+
+;; (global-set-key (kbd "C-c a") 'org-agenda)
 
 ;;; AUCTEX
 ;; (use-package tex
@@ -160,11 +177,11 @@
                 (font-lock-mode 1))))
 
 
-(use-package elpy
-  ;;:defer t
-  ;;:ensure t
-  )
-(elpy-enable)
+;; (use-package elpy
+;;   ;;:defer t
+;;   ;;:ensure t
+;;   )
+;; (elpy-enable)
 
 ;; (defvar myPackages
 ;;   '(better-defaults
