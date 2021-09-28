@@ -38,7 +38,17 @@
 ;;(require 'dracula-theme')
 ;;(set-frame-font "Inconsolata-14")
 ;; enable ess (R interpretor)
-(use-package ess-site
+(add-to-list 'load-path "~/.emacs.d/ESS/lisp/")
+(load "ess-autoloads")
+
+(use-package ess-r-mode
+  :bind
+  (:map ess-r-mode-map
+        (";" . ess-insert-assign))
+  (:map inferior-ess-r-mode-map
+        (";" . ess-insert-assign)))
+
+;;(use-package ess-site
 ;;(use-package ess  ;;:ensure t
   ;;:init (require 'ess-site))
   ;;:defer t
@@ -48,13 +58,13 @@
   ;;(add-to-list 'auto-mode-alist '("\\.R\\'" . R-mode))
   ;;(setq inferior-R-args "--no-restore-history --no-save ")
   ;;(setq ess-history-file nil)
-  )
+;;  )
 
-(require 'ess-site)
-;(require 'ess-rutils)
+;;(require 'ess-site)
+;;(require 'ess-rutils)
 
 (dolist (map (list ess-mode-map inferior-ess-mode-map))
-  (define-key map (kbd ";") 'ess-insert-assign))
+   (define-key map (kbd ";") 'ess-insert-assign))
 
   ;  :load-path "/home/robin/Gits/ESS/lisp/")
 ;;    :commands R)
@@ -189,3 +199,18 @@
 ;;     material-theme))
 ;; (elpy-enable)
 ;;; init.el ends here
+
+(setq byte-compile-warnings '(cl-functions))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(ess use-package magit flycheck dumb-jump auto-complete auctex)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
