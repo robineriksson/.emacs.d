@@ -1,6 +1,11 @@
 ;;Initialize packages
 (setq package-enable-at-startup nil)
-(package-initialize)
+;; (package-initialize)
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
+(exec-path-from-shell-copy-env "PYTHONPATH")
 
 ;; set font
 ;;(set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
@@ -39,7 +44,7 @@
 ;;(set-frame-font "Inconsolata-14")
 ;; enable ess (R interpretor)
 (add-to-list 'load-path "~/.emacs.d/ESS/lisp/")
-(load "ess-autoloads")
+;;(load "ess-autoloads")
 
 (use-package ess-r-mode
   :bind
@@ -63,8 +68,8 @@
 ;;(require 'ess-site)
 ;;(require 'ess-rutils)
 
-(dolist (map (list ess-mode-map inferior-ess-mode-map))
-   (define-key map (kbd ";") 'ess-insert-assign))
+;; (dolist (map (list ess-mode-map inferior-ess-mode-map))
+;;    (define-key map (kbd ";") 'ess-insert-assign))
 
   ;  :load-path "/home/robin/Gits/ESS/lisp/")
 ;;    :commands R)
@@ -200,6 +205,18 @@
 ;; (elpy-enable)
 ;;; init.el ends here
 
+;; associate .m file with the matlab-mode (major mode)
+(add-to-list 'auto-mode-alist '("\\.m$" . matlab-mode))
+
+;; setup matlab-shell
+(setq matlab-shell-command "/Applications/MATLAB_R2021a.app/bin/matlab")
+(setq matlab-shell-command-switches (list "-nodesktop"))
+
+;; (setq-default matlab-indent-offset 3)   ;
+(setq-default tab-width 3)
+
+
+
 (setq byte-compile-warnings '(cl-functions))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -207,10 +224,27 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(ess use-package magit flycheck dumb-jump auto-complete auctex)))
+   '(ess use-package magit flycheck dumb-jump auto-complete auctex))
+ '(warning-suppress-types '(((package reinitialization)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+;; (use-package conda
+;;   :ensure t
+;;   :init
+;;   (setq conda-anaconda-home (expand-file-name "~/miniconda3"))
+;;   (setq conda-env-home-directory (expand-file-name "~/miniconda3")))
+
+;;Anaconda support
+;; (require 'conda)
+
+;; (setq conda-env-home-directory "opt/anaconda3")
+;; ;;get current environment--from environment variable CONDA_DEFAULT_ENV
+;; (conda-env-activate 'getenv "CONDA_DEFAULT_ENV")
+;; ;;(conda-env-autoactivate-mode t)
+;; (setq-default mode-line-format (cons mode-line-format '(:exec conda-env-current-name)))
